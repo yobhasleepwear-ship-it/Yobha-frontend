@@ -35,7 +35,6 @@ const ComingSoon = () => {
       <div className="absolute inset-0 w-full h-full">
         <video 
           autoPlay 
-          muted 
           loop 
           playsInline 
           className="w-full h-full object-cover"
