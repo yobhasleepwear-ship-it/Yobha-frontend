@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const ComingSoon = () => {
   const launchDate = new Date("2025-10-20T00:00:00").getTime();
+  const videoRef = useRef(null);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -29,18 +31,93 @@ const ComingSoon = () => {
     return () => clearInterval(timer);
   }, []);
 
+  const handleVideoClick = async () => {
+    if (videoRef.current) {
+      if (isVideoPlaying) {
+        videoRef.current.pause();
+        setIsVideoPlaying(false);
+      } else {
+        try {
+          await videoRef.current.play();
+          setIsVideoPlaying(true);
+        } catch (error) {
+          console.log('Video play failed:', error);
+        }
+      }
+    }
+  };
+
+  // Force autoplay with sound when component mounts
+  useEffect(() => {
+    const forceAutoplayWithSound = async () => {
+      if (videoRef.current) {
+        // Set video properties for autoplay with sound
+        videoRef.current.muted = false;
+        videoRef.current.volume = 1.0;
+        
+        try {
+          await videoRef.current.play();
+          setIsVideoPlaying(true);
+          console.log('Video autoplay with sound successful');
+        } catch (error) {
+          console.log('Autoplay with sound blocked, trying again...', error);
+          
+          // Try multiple times with different approaches
+          setTimeout(async () => {
+            try {
+              videoRef.current.muted = false;
+              videoRef.current.volume = 1.0;
+              await videoRef.current.play();
+              setIsVideoPlaying(true);
+              console.log('Video autoplay with sound successful on retry');
+            } catch (retryError) {
+              console.log('Retry also failed, falling back to muted:', retryError);
+              // Final fallback to muted
+              videoRef.current.muted = true;
+              await videoRef.current.play();
+              setIsVideoPlaying(true);
+            }
+          }, 500);
+        }
+      }
+    };
+
+    // Try immediately and also after page load
+    forceAutoplayWithSound();
+    
+    // Also try when page is fully loaded
+    const handleLoad = () => {
+      setTimeout(forceAutoplayWithSound, 200);
+    };
+    
+    window.addEventListener('load', handleLoad);
+    return () => window.removeEventListener('load', handleLoad);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-premium-cream via-premium-beige to-premium-warm-white relative overflow-hidden">
       {/* Main Video */}
-      <div className="absolute inset-0 w-full h-full">
+      <div className="absolute inset-0 w-full h-full cursor-pointer" onClick={handleVideoClick}>
         <video 
-          autoPlay 
+          ref={videoRef}
+          autoPlay
           loop 
           playsInline 
           className="w-full h-full object-cover"
         >
-          <source src="/second final render.mp4" type="video/mp4" />
-        </video>
+        <source src="/second final render.mp4" type="video/mp4" />
+      </video>
+
+        {/* Play/Pause Overlay */}
+        {!isVideoPlaying && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+            <div className="bg-premium-white/90 backdrop-blur-sm rounded-full p-4 border border-luxury-gold/50 shadow-lg">
+              <svg className="w-8 h-8 text-luxury-gold" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+          </div>
+        )}
         
         {/* Light overlay for better text readability */}
         <div className="absolute inset-0 bg-premium-white/40"></div>
@@ -63,7 +140,7 @@ const ComingSoon = () => {
             </div>
           ))}
         </div>
-        
+
         {/* Description for Mobile */}
         <p className="text-xs text-text-dark font-helvetica font-light tracking-wide leading-relaxed drop-shadow-lg bg-premium-white/80 backdrop-blur-sm rounded-lg p-3 border border-luxury-gold/30 text-center">
           A new era of timeless elegance awaits. We're crafting something extraordinary that will redefine luxury and sophistication.
