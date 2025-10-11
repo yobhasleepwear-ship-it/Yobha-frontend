@@ -4,9 +4,9 @@ import Footer from "../footer/footer";
 
 const AppLayout = ({ children }) => {
   return (
-    <div className="app-layout">
+    <div className="min-h-screen flex flex-col bg-premium-cream">
       <Header />
-      <main>{children}</main>
+      <main className="flex-1">{children}</main>
       <Footer />
     </div>
   );

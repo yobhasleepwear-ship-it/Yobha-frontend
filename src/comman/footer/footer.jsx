@@ -3,90 +3,73 @@ import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer
-      style={{
-        width: "100%",
-        padding: "30px 20px",
-        backgroundColor: "#ffffff", // pure white background
-        color: "#b76e79", // rose-gold text
-        fontFamily: "Poppins, sans-serif",
-        textAlign: "center",
-        position: "relative",
-        bottom: 0,
-        left: 0,
-        zIndex: 10,
-        borderTop: "1px solid rgba(183, 110, 121, 0.3)", // soft rose-gold line
-        boxShadow: "0 -2px 15px rgba(0,0,0,0.05)",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-between",
-          alignItems: "center",
-          maxWidth: "1200px",
-          margin: "0 auto",
-          gap: "20px",
-        }}
-      >
-        {/* Left Section */}
-        <div style={{ flex: "1 1 300px", textAlign: "left", fontWeight: 500 }}>
-          © 2025{" "}
-          <span style={{ fontWeight: "600", color: "#d4af37" }}>YOBHA</span>. All rights reserved.
-        </div>
+    <footer className="bg-premium-beige border-t border-luxury-gold/30 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+          {/* Left Section */}
+          <div className="text-center md:text-left">
+            <p className="text-text-medium font-helvetica font-light text-sm">
+              © 2025{" "}
+              <span className="text-luxury-gold font-normal">YOBHA</span>. All rights reserved.
+            </p>
+          </div>
 
-        {/* Center Section */}
-        <div
-          style={{
-            flex: "1 1 300px",
-            display: "flex",
-            justifyContent: "center",
-            gap: "20px",
-            flexWrap: "wrap",
-          }}
-        >
-          <a href="/privacyPolicy.pdf" target="_blank" rel="noopener noreferrer" style={linkStyle}>
-            Privacy Policy
-          </a>
-          <a href="/termsandconditions.pdf" target="_blank" rel="noopener noreferrer" style={linkStyle}>
-            Terms & Conditions
-          </a>
-          <a href="/returnPolicy.pdf" target="_blank" rel="noopener noreferrer" style={linkStyle}>
-            Return Policy
-          </a>
-        </div>
+          {/* Center Section */}
+          <div className="flex flex-wrap justify-center gap-6 md:gap-8">
+            <a 
+              href="/privacyPolicy.pdf" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-text-medium hover:text-luxury-gold transition-colors duration-300 font-helvetica font-light text-sm tracking-wide"
+            >
+              Privacy Policy
+            </a>
+            <a 
+              href="/termsandconditions.pdf" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-text-medium hover:text-luxury-gold transition-colors duration-300 font-helvetica font-light text-sm tracking-wide"
+            >
+              Terms & Conditions
+            </a>
+            <a 
+              href="/returnPolicy.pdf" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-text-medium hover:text-luxury-gold transition-colors duration-300 font-helvetica font-light text-sm tracking-wide"
+            >
+              Return Policy
+            </a>
+          </div>
 
-        {/* Right Section */}
-        <div
-          style={{
-            flex: "1 1 300px",
-            display: "flex",
-            justifyContent: "flex-end",
-            gap: "15px",
-          }}
-        >
-          <a href="#" style={iconStyle}><FaFacebookF /></a>
-          <a href="#" style={iconStyle}><FaTwitter /></a>
-          <a href="#" style={iconStyle}><FaInstagram /></a>
+          {/* Right Section */}
+          <div className="flex justify-center md:justify-end gap-4">
+            <a 
+              href="#" 
+              className="text-luxury-gold hover:text-luxury-rose-gold transition-all duration-300 transform hover:scale-110"
+            >
+              <FaFacebookF size={18} />
+            </a>
+            <a 
+              href="#" 
+              className="text-luxury-gold hover:text-luxury-rose-gold transition-all duration-300 transform hover:scale-110"
+            >
+              <FaTwitter size={18} />
+            </a>
+            <a 
+              href="#" 
+              className="text-luxury-gold hover:text-luxury-rose-gold transition-all duration-300 transform hover:scale-110"
+            >
+              <FaInstagram size={18} />
+            </a>
+          </div>
         </div>
       </div>
+      
+      {/* Decorative bottom line */}
+      <div className="h-px bg-gradient-to-r from-transparent via-luxury-gold/40 to-transparent"></div>
     </footer>
   );
-};
-
-// Link + Icon hover styles
-const linkStyle = {
-  color: "#b76e79", // rose-gold
-  fontWeight: 500,
-  textDecoration: "none",
-  transition: "all 0.3s ease",
-};
-const iconStyle = {
-  color: "#d4af37", // gold
-  fontSize: "1.3rem",
-  transition: "transform 0.3s ease, color 0.3s ease",
-  cursor: "pointer",
 };
 
 export default Footer;

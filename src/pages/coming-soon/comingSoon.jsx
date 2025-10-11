@@ -30,189 +30,83 @@ const ComingSoon = () => {
   }, []);
 
   return (
-    <div className="coming-soon">
-      {/* Background video */}
-      <video autoPlay muted loop playsInline className="bg-video">
-        <source src="/second final render.mp4" type="video/mp4" />
-      </video>
+    <div className="min-h-screen bg-gradient-to-br from-premium-cream via-premium-beige to-premium-warm-white relative overflow-hidden">
+      {/* Main Video */}
+      <div className="absolute inset-0 w-full h-full">
+        <video 
+          autoPlay 
+          muted 
+          loop 
+          playsInline 
+          className="w-full h-full object-cover"
+        >
+          <source src="/second final render.mp4" type="video/mp4" />
+        </video>
+        
+        {/* Light overlay for better text readability */}
+        <div className="absolute inset-0 bg-premium-white/40"></div>
+      </div>
 
-      {/* Overlay with lighter tone */}
-      <div className="overlay"></div>
-
-      <div className="content">
-        <h1 className="fade-in-title">✨ Coming Soon</h1>
-        <p className="launch-date">
-          Launching on <strong>20th October 2025</strong>
-        </p>
-
-        <div className="countdown">
+      {/* Mobile Layout - Stacked vertically */}
+      <div className="absolute bottom-4 left-4 right-4 z-10 md:hidden">
+        {/* Countdown Timer for Mobile */}
+        <div className="flex justify-center gap-2 mb-4">
           {["days", "hours", "minutes", "seconds"].map((unit) => (
-            <div key={unit} className="time-unit">
-              <h2>{timeLeft[unit]}</h2>
-              <p>{unit}</p>
+            <div key={unit} className="group">
+              <div className="bg-premium-white/90 backdrop-blur-sm border border-luxury-gold/50 rounded-lg p-2 hover:border-luxury-gold/70 hover:bg-premium-white/95 transition-all duration-300 shadow-lg">
+                <div className="text-lg font-helvetica font-light text-luxury-gold mb-1 text-center">
+                  {String(timeLeft[unit]).padStart(2, '0')}
+                </div>
+                <div className="text-xs text-text-medium font-helvetica font-light tracking-wider uppercase text-center">
+                  {unit}
+                </div>
+              </div>
             </div>
           ))}
         </div>
-
-        <p className="subtitle fade-in-subtitle">
-          A new era of timeless elegance awaits ✨
+        
+        {/* Description for Mobile */}
+        <p className="text-xs text-text-dark font-helvetica font-light tracking-wide leading-relaxed drop-shadow-lg bg-premium-white/80 backdrop-blur-sm rounded-lg p-3 border border-luxury-gold/30 text-center">
+          A new era of timeless elegance awaits. We're crafting something extraordinary that will redefine luxury and sophistication.
         </p>
       </div>
 
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@300;400;500&display=swap');
+      {/* Desktop Layout - Side by side */}
+      <div className="hidden md:block">
+        {/* Countdown Timer - Positioned at bottom right */}
+        <div className="absolute bottom-8 right-8 z-10">
+          <div className="flex gap-4">
+            {["days", "hours", "minutes", "seconds"].map((unit) => (
+              <div key={unit} className="group">
+                <div className="bg-premium-white/90 backdrop-blur-sm border border-luxury-gold/50 rounded-lg p-4 hover:border-luxury-gold/70 hover:bg-premium-white/95 transition-all duration-300 hover:scale-105 shadow-lg">
+                  <div className="text-2xl lg:text-3xl font-helvetica font-light text-luxury-gold mb-1 text-center">
+                    {String(timeLeft[unit]).padStart(2, '0')}
+                  </div>
+                  <div className="text-sm text-text-medium font-helvetica font-light tracking-wider uppercase text-center">
+                    {unit}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
 
-        .coming-soon {
-          position: relative;
-          height: 100vh;
-          width: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-family: 'Montserrat', sans-serif;
-          color: #fff;
-          overflow: hidden;
-        }
+        {/* Elegant Description - Positioned at bottom left */}
+        <div className="absolute bottom-8 left-8 z-10 max-w-md">
+          <p className="text-base lg:text-lg text-text-dark font-helvetica font-light tracking-wide leading-relaxed drop-shadow-lg bg-premium-white/80 backdrop-blur-sm rounded-lg p-4 border border-luxury-gold/30">
+            A new era of timeless elegance awaits. We're crafting something extraordinary that will redefine luxury and sophistication.
+          </p>
+        </div>
+      </div>
 
-        .bg-video {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          z-index: 0;
-          filter: brightness(0.75) contrast(1.05) saturate(1.2);
-        }
+      {/* Decorative Elements */}
+      <div className="absolute top-1/4 left-8 w-1 h-16 bg-gradient-to-b from-luxury-gold/60 to-transparent shadow-lg"></div>
+      <div className="absolute top-1/3 right-8 w-1 h-12 bg-gradient-to-b from-luxury-rose-gold/60 to-transparent shadow-lg"></div>
+      <div className="absolute bottom-1/4 left-12 w-1 h-20 bg-gradient-to-b from-luxury-cream/60 to-transparent shadow-lg"></div>
+      <div className="absolute bottom-1/3 right-12 w-1 h-14 bg-gradient-to-b from-luxury-gold/60 to-transparent shadow-lg"></div>
 
-        .overlay {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(15, 10, 10, 0.8));
-          backdrop-filter: blur(2px);
-          z-index: 1;
-        }
-
-        .content {
-          position: relative;
-          z-index: 2;
-          text-align: center;
-          padding: 20px 40px;
-          backdrop-filter: blur(10px);
-          background: rgba(255, 255, 255, 0.05);
-          border-radius: 25px;
-          border: 1px solid rgba(255, 215, 0, 0.15);
-          box-shadow: 0 0 40px rgba(212, 175, 55, 0.25);
-          animation: fadeIn 2s ease-out;
-        }
-
-        h1 {
-          font-family: 'Playfair Display', serif;
-          font-size: 4.5rem;
-          letter-spacing: 1.5px;
-          margin-bottom: 1.5rem;
-          background: linear-gradient(90deg, #e4b169, #b76e79, #f8ecc2);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          animation: slideDown 1.8s ease-out;
-        }
-
-        .launch-date {
-          font-size: 1.25rem;
-          margin-bottom: 2rem;
-          font-weight: 300;
-          color: rgba(255, 255, 255, 0.9);
-        }
-
-        .countdown {
-          display: flex;
-          justify-content: center;
-          gap: 30px;
-          padding: 25px 50px;
-          border-radius: 25px;
-          background: rgba(255, 255, 255, 0.08);
-          box-shadow: inset 0 0 20px rgba(183, 110, 121, 0.3);
-          border: 1px solid rgba(245, 222, 179, 0.3);
-          backdrop-filter: blur(15px);
-          transition: transform 0.4s ease;
-        }
-
-        .countdown:hover {
-          transform: scale(1.03);
-        }
-
-        .time-unit {
-          text-align: center;
-          min-width: 80px;
-        }
-
-        .time-unit h2 {
-          font-size: 3rem;
-          font-family: 'Playfair Display', serif;
-          background: linear-gradient(180deg, #f8ecc2, #cfa66b);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-
-        .time-unit p {
-          text-transform: uppercase;
-          font-size: 0.85rem;
-          letter-spacing: 2px;
-          color: rgba(255, 255, 255, 0.7);
-        }
-
-        .subtitle {
-          margin-top: 2.5rem;
-          font-size: 1.15rem;
-          font-weight: 300;
-          color: #f8e1b5;
-          letter-spacing: 1px;
-          font-style: italic;
-        }
-
-        /* Fade and slide animations */
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideDown {
-          0% { opacity: 0; transform: translateY(-30px); }
-          100% { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Glow around content */
-        .coming-soon::after {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: radial-gradient(circle at 50% 60%, rgba(212,175,55,0.1), transparent 75%);
-          z-index: 1;
-          animation: glow 5s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-          from { opacity: 0.3; }
-          to { opacity: 0.6; }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-          h1 { font-size: 3.2rem; }
-          .countdown { gap: 20px; padding: 20px 30px; }
-          .time-unit h2 { font-size: 2.3rem; }
-        }
-
-        @media (max-width: 480px) {
-          h1 { font-size: 2.4rem; }
-          .launch-date { font-size: 1rem; }
-          .countdown { flex-wrap: wrap; padding: 15px 20px; }
-          .time-unit h2 { font-size: 1.8rem; }
-        }
-      `}</style>
+      {/* Bottom Decorative Line */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-luxury-gold/50 to-transparent"></div>
     </div>
   );
 };
