@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const ContactUs = () => {
-  const whatsappNumber = "+916200830664";
+  const whatsappNumber = "+917827051829";
   const whatsappText = "Hello, I'd like to get in touch regarding your products.";
 
   // Contact form state
