@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
@@ -15,7 +16,21 @@ const Footer = () => {
           </div>
 
           {/* Center Section */}
-          <div className="flex flex-wrap justify-center gap-6 md:gap-8">
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8">
+            <Link 
+              to="/contact-us"
+              className="text-text-medium hover:text-luxury-gold transition-colors duration-300 font-helvetica font-light text-sm tracking-wide"
+            >
+              Contact Us
+            </Link>
+            <a 
+              href="/shipmentPolicy.pdf" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-text-medium hover:text-luxury-gold transition-colors duration-300 font-helvetica font-light text-sm tracking-wide"
+            >
+              Shipment Policy
+            </a>
             <a 
               href="/privacyPolicy.pdf" 
               target="_blank" 

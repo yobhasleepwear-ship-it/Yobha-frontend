@@ -4,11 +4,13 @@ import AppLayout from "./comman/app-layout/app-layout";
 
 // Lazy load pages
 const Home = lazy(() => import("./pages/coming-soon/comingSoon"));
+const ContactUs = lazy(() => import("./pages/contact-us/ContactUs"));
 
 const Router = () => {
   const routes = [
     { path: "/", element: <Navigate to="/home" replace /> },
     { path: "/home", element: <Home /> },
+    { path: "/contact-us", element: <ContactUs /> },
     // Add more pages here
   ];
 
